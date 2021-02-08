@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  </body>
+    {% for discussion in discussions %}
+      <div class="discussion-container">
+        <div class="file-header">
+          {# TODO: Link to the file? #}
+          {{ discussion.path }}
+        </div>
+        <div class="diff">
+          {# TODO: Parse this into a table format like on GitHub? #}
+          {{ discussion.diffHunk }}
+        </div>
+        <div class="comments-container">
+          {% for comment in discussion.comments %}
+            <div class="comment">
+              <h4 class="comment-header">
+                <strong><a href="{{ comment.user.url }}">{{ comment.user.login }}</a></strong>
+                <span>{{ comment.created_at.strftime('%B %d, %Y %I:%M %p') }}</span>
+              </h4>
+              <div class="comment-body">
+                {{ comment.body }}
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    {% endfor %}
+  </body>
+</head>
+
+</html>
