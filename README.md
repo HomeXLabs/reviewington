@@ -4,7 +4,7 @@
 
 Run the program locally using:
 
-`cd` into `Reviewington` and run below command
+`cd` into `reviewington` (inside `reviewington`) and run below command
 
 ```
 FLASK_APP=app.py FLASK_DEBUG=1 python -m flask run
