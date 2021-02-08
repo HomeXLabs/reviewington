@@ -10,4 +10,4 @@ def index():
 
 
 if __name__ == "__main__":
-    app.run(passthrough_errors=False)
+    app.run()
