@@ -3,7 +3,7 @@ from distutils.core import setup
 
 
 setup(
-  name = 'Reviewington',         
+  name = 'reviewington',
   packages = setuptools.find_packages(),
   version = '0.0.1', 
   license='MIT',    
