@@ -9,19 +9,16 @@
   </head>
   <body>
     {% for discussion in discussions %}
-    <div
-      class="discussion-container"
-      style="border: solid #dadada; border-width: 1px"
-    >
+    <div style="border: solid #dadada; border-width: 1px">
       <div class="file-header" style="padding: 5px; background: #f2f2f2">
         {# TODO: Link to the file? #} {{ discussion.path }}
       </div>
       <hr style="color: #dadada; margin: 0px" />
       <div
-        class="diff"
         style="
           font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo,
             monospace;
+          font-size: 12px;
         "
       >
         {# TODO: Parse this into a table format like on GitHub? #} {{

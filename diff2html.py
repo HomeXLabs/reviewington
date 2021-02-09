@@ -5,6 +5,9 @@ Script for convert unified diff text into html
 """
 
 import re
+from pygments import highlight
+from pygments.lexers import get_lexer_for_filename
+from pygments.formatters import HtmlFormatter
 
 separator = '*' * 3
 def handleBlock(block):
@@ -117,7 +120,7 @@ def makeBlocks(diff):
 
 bg_table = 'white'
 table = '<table style="width:98%%;border-spacing:1px;text-align=left;background:' + bg_table + '#eeeeee;padding:0;margin:0;border:1px;cellspacing:0;">\n%s\n</table>'
-row   = '<tr><td style="width:2%%;font-size:12px;font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace;color:grey;text-align:center;">%s</td><td style="width:48%%;font-size:12px;font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace;color:%s;background:%s;">%s</td><td style="width:2%%;font-size:12px;font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace;color:grey;text-align:center;">%s</td><td style="width:48%%;font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace;font-size:12px;color:%s;background:%s;">%s</td></tr>'
+row   = '<tr><td style="width:2%%;font-size:12px;font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace;color:grey;text-align:center;">%s</td><td class="highlight" style="width:48%%;background:%s;">%s</td><td style="width:2%%;font-size:12px;font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace;color:grey;text-align:center;">%s</td><td class="highlight" style="width:48%%;background:%s;">%s</td></tr>'
 empty_row = '<tr style="background:purple;"><td style="text-align:center;"><hr/></td><td style="text-align:center;"><hr/></td><td style="text-align:center;"><hr/></td><td style="text-align:center;"><hr/></td></tr>'
 
 color_nor = 'black'
@@ -128,15 +131,12 @@ bg_mod    = '#ffdea2'
 bg_add    = '#bef5cb'
 bg_del    = '#ffdce0'
 
-def text2html(plain):
-    html = plain.replace('<', '&lt;').\
-                 replace('>', '&gt;').\
-                 replace('\n', '<br/>').\
-                 replace('\t', '    ').\
-                 replace(' ', '&nbsp;')
-    return html
+def text2html(filename, plain):
+    lexer = get_lexer_for_filename(filename);
+    formatter = HtmlFormatter(nowrap=True)
+    return highlight(plain, lexer, formatter)
 
-def makeHTML(blocks):
+def makeHTML(blocks, filename):
     # blocks is None
     if not blocks:
         return
@@ -170,11 +170,11 @@ def makeHTML(blocks):
             left = left[1:]
         if right.startswith('+'):
             right = right[1:]
-        rows.append(row % (leftLine, color_left, bg_left, text2html(left), rightLine, color_right, bg_right, text2html(right)))
+        rows.append(row % (leftLine, bg_left, text2html(filename, left), rightLine, bg_right, text2html(filename, right)))
     return table % '\n\t'.join(rows)
 
-def diff2html(diff):
+def diff2html(diff, filename):
     blocks = makeBlocks(diff)
-    html   = makeHTML(blocks)
+    html   = makeHTML(blocks, filename)
     return html
 

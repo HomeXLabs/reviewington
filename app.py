@@ -3,11 +3,12 @@ from diff2html import diff2html
 from flask import Flask, render_template
 import markdown
 from markdown.extensions.fenced_code import FencedCodeExtension
+from pygments.lexers import guess_lexer, guess_lexer_for_filename
 
 app = Flask(__name__, template_folder="templates")
 
-def getHtml(diffData):
-   return diff2html(diffData)
+def getHtml(diffData, filename):
+   return diff2html(diffData, filename)
 
 @app.route("/", methods=["GET"])
 def index():
@@ -17,14 +18,14 @@ def index():
             {
                 "url": "https://api.github.com/repos/octocat/Hello-World/pulls/comments/1",
                 "path": "file1.txt",
-                "diffHunk": getHtml("@@ -219,24 +239,77 @@\n     ```\n \n ## Ordering\n-  - Always follow the following order for methods in a React component:\n+\n+  - Ordering for class extends React.Component:\n+  \n+  1. constructor\n+  1. optional static methods\n+  1. getChildContext\n+  1. componentWillMount\n+  1. componentDidMount\n+  1. componentWillReceiveProps\n+  1. shouldComponentUpdate\n+  1. componentWillUpdate\n+  1. componentDidUpdate\n+  1. componentWillUnmount\n+  1. *clickHandlers or eventHandlers* like onClickSubmit() or onChangeDescription()\n+  1. *getter methods for render* like getSelectReason() or getFooterContent()\n+  1. *Optional render methods* like renderNavigation() or renderProfilePicture()\n+  1. render\n+\n+  - How to define propTypes, defaultProps, contextTypes, etc...  \n+\n+  ```javascript\n+  import React, { Component, PropTypes } from 'react';\n+  \n+  const propTypes = {\n+    id: PropTypes.number.isRequired,\n+    url: PropTypes.string.isRequired,\n+    text: PropTypes.string,\n+  };\n+  \n+  const defaultProps = {\n+    text: 'Hello World',\n+  };\n+  \n+  class Link extends Component {"),
+                "diffHunk": getHtml("@@ -219,24 +239,77 @@\n     ```\n \n ## Ordering\n-  - Always follow the following order for methods in a React component:\n+\n+  - Ordering for class extends React.Component:\n+  \n+  1. constructor\n+  1. optional static methods\n+  1. getChildContext\n+  1. componentWillMount\n+  1. componentDidMount\n+  1. componentWillReceiveProps\n+  1. shouldComponentUpdate\n+  1. componentWillUpdate\n+  1. componentDidUpdate\n+  1. componentWillUnmount\n+  1. *clickHandlers or eventHandlers* like onClickSubmit() or onChangeDescription()\n+  1. *getter methods for render* like getSelectReason() or getFooterContent()\n+  1. *Optional render methods* like renderNavigation() or renderProfilePicture()\n+  1. render\n+\n+  - How to define propTypes, defaultProps, contextTypes, etc...  \n+\n+  ```javascript\n+  import React, { Component, PropTypes } from 'react';\n+  \n+  const propTypes = {\n+    id: PropTypes.number.isRequired,\n+    url: PropTypes.string.isRequired,\n+    text: PropTypes.string,\n+  };\n+  \n+  const defaultProps = {\n+    text: 'Hello World',\n+  };\n+  \n+  class Link extends Component {", "something.txt"),
                 "comments": [
                     {
                         "user": {
                             "login": "octocat",
                             "url": "https://api.github.com/users/octocat",
                         },
-                        "body": markdown.markdown("Great *stuff*!\n Have you tried ```print('Hello, world')```? ", extensions=[FencedCodeExtension()]).replace('\n', '<br/>'),
+                        "body": markdown.markdown("Great *stuff*!\n Have you tried ```python print('Hello, world')```? ", extensions=['fenced_code']).replace('\n', '<br/>'),
                         "created_at": datetime.datetime.strptime(
                             "2011-04-14T16:00:49Z", "%Y-%m-%dT%H:%M:%SZ"
                         ),
@@ -34,7 +35,7 @@ def index():
                             "login": "octodog",
                             "url": "https://api.github.com/users/octocat",
                         },
-                        "body": "Thanks!",
+                        "body":  markdown.markdown("Thanks ", extensions=['fenced_code']).replace('\n', '<br/>'),
                         "created_at": datetime.datetime.strptime(
                             "2011-04-14T16:32:21Z", "%Y-%m-%dT%H:%M:%SZ"
                         ),
