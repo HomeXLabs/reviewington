@@ -69,7 +69,7 @@ def main():
     global pr
     pr = args.pr_number
     print(
-        "Running in job %s on %s with pull number  %s"
+        f"Running in job {job_name} on {repository_name} with pull number {args.pr_number}"
         % (job_name, repository_name, args.pr_number)
     )
     url = "https://api.github.com/repos/{}/pulls/{}/comments".format(
