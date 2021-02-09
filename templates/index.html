@@ -1,34 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-  </body>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/index.css') }}"
+    />
+  </head>
+  <body>
     {% for discussion in discussions %}
-      <div class="discussion-container">
-        <div class="file-header">
-          {# TODO: Link to the file? #}
-          {{ discussion.path }}
-        </div>
-        <div class="diff">
-          {# TODO: Parse this into a table format like on GitHub? #}
-          {{ discussion.diffHunk }}
-        </div>
-        <div class="comments-container">
-          {% for comment in discussion.comments %}
-            <div class="comment">
-              <h4 class="comment-header">
-                <strong><a href="{{ comment.user.url }}">{{ comment.user.login }}</a></strong>
-                <span>{{ comment.created_at.strftime('%B %d, %Y %I:%M %p') }}</span>
-              </h4>
-              <div class="comment-body">
-                {{ comment.body }}
-              </div>
-            </div>
-          {% endfor %}
-        </div>
+    <div
+      class="discussion-container"
+      style="border: solid #dadada; border-width: 1px"
+    >
+      <div class="file-header" style="padding: 5px; background: #f2f2f2">
+        {# TODO: Link to the file? #} {{ discussion.path }}
       </div>
+      <hr style="color: #dadada; margin: 0px" />
+      <div
+        class="diff"
+        style="
+          font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo,
+            monospace;
+        "
+      >
+        {# TODO: Parse this into a table format like on GitHub? #} {{
+        discussion.diffHunk|safe }}
+      </div>
+      <hr style="color: #dadada; margin: 0px" />
+      <div class="markdown-body" style="padding: 5px">
+        {% for comment in discussion.comments %}
+        <div class="comment" style="padding: 2px">
+          <h4 style="color: black; display: inline">
+            {{ comment.user.login }}
+          </h4>
+          <h6 style="color: gray; display: inline; padding-left: 5px">
+            {{ comment.created_at.strftime('%B %d, %Y %I:%M %p') }}
+          </h6>
+          <div style="padding: 2px">{{ comment.body|safe }}</div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
     {% endfor %}
   </body>
-</head>
-
 </html>
