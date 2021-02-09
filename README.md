@@ -7,7 +7,7 @@ Run the program locally using:
 `cd` into `reviewington` (inside `reviewington`) and run below command
 
 ```
-FLASK_APP=app.py FLASK_DEBUG=1 python -m flask run
+FLASK_APP=app.py FLASK_DEBUG=1 python3 -m flask run
 ```
 
 ### Writing PRs

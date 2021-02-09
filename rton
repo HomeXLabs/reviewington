@@ -1,0 +1,16 @@
+#!/bin/bash
+
+
+if [ -z $1 ]; then
+    echo "Missing an argument!"
+elif [ $1 == "run" ] && [ -z $2 ]; then
+    echo "Missing Github Organization and Repository name! Example: HomeXLabs/reviewington"
+elif [ $1 == "run" ] && [ $2 ]; then
+    FLASK_APP=reviewington/app.py GITHUB_ORG_REPO=$2 python3 -m flask run
+elif [ $1 == "about" ]; then
+    cat about.txt
+elif [ $1 == "configure" ]; then
+    python3 -m reviewington.configurator
+else
+    echo "Command not supported! Please check our documentation."
+fi

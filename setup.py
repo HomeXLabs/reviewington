@@ -5,6 +5,7 @@ from distutils.core import setup
 setup(
   name = 'reviewington',
   packages = setuptools.find_packages(),
+  scripts = ['rton'],
   version = '0.0.1', 
   license='MIT',    
   description = 'Reviewington gives you wings when reviewing code', #change later
