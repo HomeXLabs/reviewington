@@ -1,6 +1,3 @@
 python-dotenv
 PyGithub
-gitpython
-
-# for testing
-ipython
+Flask

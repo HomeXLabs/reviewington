@@ -1,16 +1,27 @@
-# reviewington
+# Reviewington
 
-# Development Environment
+## Usage
+
+Run the program locally using:
+
+`cd` into `reviewington` (inside `reviewington`) and run below command
+
+```
+FLASK_APP=app.py FLASK_DEBUG=1 python -m flask run
+```
+
+### Writing PRs
+
+To get the most out of Reviewington you should write PR's that follow our recommended [PR Comment Etiquette](/docs/pr_etiquette.md).
+
+If you want a PR comment to be ignored by Reviewington you can prepend it with the custom tag `NA:`, this ensures that the PR comment will not be picked up while processing.
+This is different from having a non-existent tag, which will still be picked up by Reviewington but with the default PR tag of `null`.
+
+## Development Environment
 
 ```
 python -m virtualenv venv
 venv/bin/pip install pip-tools
 venv/bin/python -m piptools compile
 venv/bin/python -m piptools sync
-```
-
-# To run
-
-```
-venv/bin/python reviewington/repository.py
 ```
