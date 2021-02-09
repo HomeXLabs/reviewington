@@ -15,17 +15,14 @@ def setup_args():
 
 
 def review_comment_check(comment_body):
-    res = comment_body.startswith(tuple(pref_list))
-    print(res)
-    return res
+     
+    return comment_body.startswith(tuple(pref_list))
 
 
 def parse_review_comment(data, github):
     for comment in data:
+        print(comment)
         if "in_reply_to_id" not in comment:
-            print(comment["body"])
-            response = review_comment_check(comment["body"])
-            print(response)
             if not review_comment_check(comment["body"]):
                 review_comment_edit(comment["id"], github, comment["body"])
 
