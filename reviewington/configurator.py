@@ -4,9 +4,7 @@ import subprocess
 from pathlib import Path
 
 
-print("Please Enter Github Token:")
-
-github_token = input()
+github_token = input("Please Enter Github Token:")
 
 home_dir = str(Path.home())
 
