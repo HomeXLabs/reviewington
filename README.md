@@ -12,5 +12,5 @@ venv/bin/python -m piptools sync
 # To run
 
 ```
-venv/bin/python -m reviewington
+venv/bin/python reviewington/repository.py
 ```
