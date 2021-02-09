@@ -72,7 +72,10 @@ def main():
         repository_name, pr
     )
 
-    headers = {"Accept": "application/vnd.github.v3+json"}
+    headers = {
+        "Accept": "application/vnd.github.v3+json",
+        "Authorization": "Bearer " + str(github),
+    }
 
     resp = requests.get(url=url, headers=headers)
     data = resp.json()
