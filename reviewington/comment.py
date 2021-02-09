@@ -1,7 +1,5 @@
 import json
 
-from github.PullRequestComment import PullRequestComment
-
 
 class Comment:
     """Class for formatting and munging the PullRequestComment Data format.
