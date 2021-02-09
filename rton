@@ -1,0 +1,14 @@
+#!/bin/bash
+
+
+if [ -z $1 ]; then
+    echo "Missing an argument!"
+elif [ $1 == "run" ]; then 
+    FLASK_APP=reviewington/app.py python3 -m flask run
+elif [ $1 == "about" ]; then
+	cat about.txt
+elif [ $1 == "configure" ]; then
+    python3 -m reviewington.configurator
+else
+    echo "Command not supported! Please check our documentation."
+fi
