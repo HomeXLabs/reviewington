@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/index.css') }}"
+    />
+  </head>
+  <body>
+    <div class="search-controls">
+      <form>
+        <input
+          hidden
+          type="text"
+          id="review-filename"
+          name="filename"
+          value="{{ request.args.get('filename') }}"
+        /><br />
+        <label for="review-search">Search</label>
+        <input
+          type="text"
+          id="review-search"
+          name="search"
+          value="{{ request.args.get('search') }}"
+        /><br />
+        {% for tag in tags %}
+        <input
+          type="checkbox"
+          id="etiquette-{{ tag.id }}"
+          name="{{ tag.id }}"
+          value="true"
+          {%
+          if
+          tag.id
+          in
+          request.args.keys()
+          %}
+          checked
+          {%
+          endif
+          %}
+        />
+        <label for="etiquette-{{ tag.id }}">{{ tag.name }}</label>
+        {% endfor %}
+        <br />
+        <input type="submit" value="Submit" />
+      </form>
+    </div>
+    <div class="discussions">
+      {% for discussion in discussions %}
+      <div style="border: solid #dadada; border-width: 1px">
+        <div class="file-header" style="padding: 5px; background: #f2f2f2">
+          {# TODO: Link to the file? #} {{ discussion.path }}
+        </div>
+        <hr style="color: #dadada; margin: 0px" />
+        <div
+          style="
+            font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo,
+              monospace;
+            font-size: 12px;
+          "
+        >
+          {# TODO: Parse this into a table format like on GitHub? #} {{
+          discussion.diffHunk|safe }}
+        </div>
+        <hr style="color: #dadada; margin: 0px" />
+        <div class="markdown-body" style="padding: 5px">
+          {% for comment in discussion.comments %}
+          <div class="comment" style="padding: 2px">
+            <h4 style="color: black; display: inline">
+              {{ comment.user.login }}
+            </h4>
+            <h6 style="color: gray; display: inline; padding-left: 5px">
+              {{ comment.created_at.strftime('%B %d, %Y %I:%M %p') }}
+            </h6>
+            <div style="padding: 2px">{{ comment.body|safe }}</div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </body>
+</html>
