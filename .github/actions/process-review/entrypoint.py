@@ -76,6 +76,7 @@ def main():
 
     resp = requests.get(url=url, headers=headers)
     data = resp.json()
+    print(data)
     parse_review_comment(data, github)
 
 
