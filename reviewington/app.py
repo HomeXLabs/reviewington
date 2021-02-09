@@ -3,7 +3,6 @@ from diff2html import diff2html
 from flask import Flask, render_template
 import markdown
 from markdown.extensions.fenced_code import FencedCodeExtension
-from pygments.lexers import guess_lexer, guess_lexer_for_filename
 
 app = Flask(__name__, template_folder="templates")
 
@@ -73,4 +72,4 @@ def reviews():
 
 
 if __name__ == "__main__":
-    app.run(passthrough_errors=False)
+    app.run()
