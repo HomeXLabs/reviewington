@@ -15,9 +15,8 @@ def setup_args():
 
 
 def review_comment_check(comment_body):
-    res = comment_body.startswith(tuple(pref_list))
 
-    return res
+    return comment_body.startswith(tuple(pref_list))
 
 
 def parse_review_comment(data):
@@ -31,7 +30,6 @@ def review_comment_edit(id, github, body):
     url = "https://api.github.com/repos/{}/pulls/comments/{}".format(
         repository_name, id
     )
-    print(url)
     headers = {
         "Accept": "application/vnd.github.v3+json",
         "Authorization": "Bearer " + str(github),
@@ -68,10 +66,7 @@ def main():
     github = args.token
     global pr
     pr = args.pr_number
-    print(
-        f"Running in job {job_name} on {repository_name} with pull number {args.pr_number}"
-        % (job_name, repository_name, args.pr_number)
-    )
+
     url = "https://api.github.com/repos/{}/pulls/{}/comments".format(
         repository_name, pr
     )
