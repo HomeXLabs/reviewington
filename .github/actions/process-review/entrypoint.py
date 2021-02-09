@@ -22,7 +22,7 @@ def review_comment_check(comment_body):
 def parse_review_comment(data, github):
     for comment in data:
         if "in_reply_to_id" not in comment:
-            if not (review_comment_check(comment["body"])):
+            if not comment_body.startswith(tuple(pref_list)):
                 review_comment_edit(comment["id"], github, comment["body"])
 
 
