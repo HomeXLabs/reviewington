@@ -3,6 +3,7 @@ import argparse
 import os
 import requests
 import json
+import re
 from difflib import get_close_matches
 from urllib.parse import urlparse
 
@@ -16,9 +17,8 @@ def setup_args():
 
 
 def fuzzy_review_comment_check(comment_body):
-    first_word = comment_body.split()[0]
-    print(first_word)
-    print(first_word.isalnum())
+    first_word = re.sub('[^A-Za-z0-9]+', '', comment_body.split()[0]) #removing special character
+    
     match = get_close_matches(first_word, pref_list, cutoff=0.8)
     if not match:
         return False
