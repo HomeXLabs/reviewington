@@ -17,6 +17,8 @@ def setup_args():
 
 def fuzzy_review_comment_check(comment_body):
     first_word = comment_body.split()[0]
+    print(first_word)
+    print(first_word.isalnum())
     match = get_close_matches(first_word, pref_list, cutoff=0.8)
     if not match:
         return False
