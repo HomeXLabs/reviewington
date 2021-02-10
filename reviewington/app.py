@@ -10,18 +10,18 @@ out = subprocess.check_output(
 )
 
 
-def recurse_setdefault(res, array):
+def recurse_setdefault(res, array, currentPath):
     if len(array) == 0:
         return
     elif len(array) == 1:
-        res[array[0]] = {}
+        res[(array[0], ''.join([currentPath, '/', array[0]]))] = {}
     else:
-        recurse_setdefault(res.setdefault(array[0], {}), array[1:])
+        recurse_setdefault(res.setdefault((array[0], currentPath + '/' + array[0]), {}), array[1:], ''.join([currentPath, '/', array[0]]))
 
 
 res = {}
 for f in out.decode("utf-8").splitlines():
-    recurse_setdefault(res, f.split("/"))
+    recurse_setdefault(res, f.split("/"), '')
 
 app = Flask(__name__, template_folder="templates")
 
@@ -42,9 +42,8 @@ TAGS = [
 def getHtml(diffData, path):
     return diff2html(diffData, path)
 
-
 def searchMatch(params):
-    filename = params.get("filename", "")
+    filepath = params.get("filepath", "")
     search_query = params.get("search", "")
     missing_tag_allowed = False
     valid_tags = []
@@ -66,7 +65,7 @@ def searchMatch(params):
             or comment["tag"] in valid_tags
             or (missing_tag_allowed and len(comment["tag"]) == 0)
         )
-        and (comment["path"] == filename)
+        and (comment["path"].startswith(filepath))
         and (
             search_query.lower() in comment["diffHunk"].lower()
             or len(list(filter(filterComments, comment["comments"]))) > 0
@@ -78,12 +77,12 @@ def searchMatch(params):
 def index():
     return render_template("index.html", files=res)
 
-
 @app.route("/reviews", methods=["GET"])
 def reviews():
     return render_template(
         "reviews.html",
         tags=TAGS,
+        filepath= request.args.get("filepath", ""),
         discussions=filter(
             searchMatch(request.args),
             [
