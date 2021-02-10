@@ -45,7 +45,7 @@ def getHtml(diffData, path):
 
 def searchMatch(params):
     filename = params.get("filename")
-    search_query = params.get("search")
+    search_query = params.get("search", "")
     missing_tag_allowed = False
     valid_tags = []
     for tag in TAGS:
