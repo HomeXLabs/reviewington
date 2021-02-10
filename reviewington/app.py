@@ -49,10 +49,11 @@ def searchMatch(params):
     missing_tag_allowed = False
     valid_tags = []
     for tag in TAGS:
-        tag_val = params.get(tag["id"])
+        tag_id = tag["id"]
+        tag_val = params.get(tag_id)
         if tag_val:
-            valid_tags.append(tag["id"])
-            if tag["id"] == "none":
+            valid_tags.append(tag_id)
+            if tag_id == "none":
                 missing_tag_allowed = True
 
     def filterComments(comment):
