@@ -14,6 +14,7 @@ def get_remote_info():
     repo_name = os.getenv("REPO_NAME")
     return f"{org_name}/{repo_name}"
 
+
 class Repository:
     github = Github(os.getenv("GITHUB_PAT"))
 
