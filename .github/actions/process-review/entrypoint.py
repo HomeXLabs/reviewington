@@ -17,8 +17,11 @@ def setup_args():
 
 
 def fuzzy_review_comment_check(comment_body):
-    first_word = re.sub('[^A-Za-z0-9]+', '', comment_body.split()[0]) #removing special character
-    
+    first_word = comment_body.split()[0]
+    if first_word != "⚠️":
+        first_word = re.sub('[^A-Za-z0-9]+', '', first_word) #removing special character
+        
+
     match = get_close_matches(first_word, pref_list, cutoff=0.8)
     if not match:
         return False
