@@ -72,7 +72,7 @@
       {% for discussion in discussions %}
       <div class="discussion">
         <div class="file-header">
-          {# TODO: Link to the file? #} {{ discussion.path }}
+          <a href="{{ discussion.urlToPath }}">{{ discussion.path }}</a>
         </div>
         <hr />
         <div class="diff">{{ discussion.diffHunk|safe }}</div>
