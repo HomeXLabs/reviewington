@@ -16,7 +16,6 @@ def setup_github_token():
     if not os.path.exists(config_dir):
         subprocess.run(["mkdir", config_dir])
 
-
     with open(config_path, "w") as f:
         f.write(f"GITHUB TOKEN: {github_token}" + "\n")
 
