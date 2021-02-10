@@ -14,7 +14,11 @@ setup(
     url="https://github.com/HomeXLabs/reviewington",
     download_url="https://github.com/HomeXLabs/reviewington",
     package_dir={"reviewington": "reviewington"},
-    package_data={"reviewington": ["templates/*"], "reviewington": ["static/css/*"]},
+    package_data={
+        "reviewington": ["templates/*"],
+        "reviewington": ["static/css/*"],
+        "reviewington": ["github_templates/*"],
+    },
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",

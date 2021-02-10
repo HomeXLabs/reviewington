@@ -1,0 +1,30 @@
+# this workflow will check the format of review comments
+
+name: review_checker
+
+# Controls when the action will run. 
+on:
+  pull_request_review_comment:
+    types: [created, edited]
+
+jobs:
+  review_checker:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+        
+      - name: 'getting pr number'
+        id: pr_number
+        run:  echo "::set-output name=number::`echo $GITHUB_REF | cut -d/ -f 3`"
+
+      # Runs a script file using a runners shell
+      - name: 'parsing reviews'
+        id: parsing_review
+        uses: ./.github/actions/process-review
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ steps.pr_number.outputs.number }}    
+
