@@ -52,9 +52,10 @@ def searchMatch(params):
         tag_id = tag["id"]
         tag_val = params.get(tag_id)
         if tag_val:
-            valid_tags.append(tag_id)
             if tag_id == "none":
                 missing_tag_allowed = True
+            else:
+                valid_tags.append(tag_id)
 
     def filterComments(comment):
         return search_query.lower() in comment["body"].lower()
