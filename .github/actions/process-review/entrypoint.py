@@ -15,21 +15,13 @@ def setup_args():
     return parser.parse_args()
 
 
-
-
-
-
 def fuzzy_review_comment_check(comment_body):
     first_word = comment_body.split()[0]
-    print(first_word)
     match = get_close_matches(first_word, pref_list, cutoff=0.8)
-    print(match)
     if not match:
         return False
     else:
         return True
-    
-
 
 
 def parse_review_comment(data, github):
@@ -49,11 +41,10 @@ def review_comment_edit(id, github, body):
     }
     print(headers)
     payload = {
-        "body": str(body) + " \n\n⚠️ [PR Comment Etiquette](https://github.com/HomeXLabs/reviewington/blob/main/docs/pr_etiquette.md) not followed on above comment ⚠️"
-
+        "body": str(body)
+        + " \n\n⚠️ [PR Comment Etiquette](https://github.com/HomeXLabs/reviewington/blob/main/docs/pr_etiquette.md) not followed on above comment ⚠️"
     }
     resp = requests.patch(url=url, headers=headers, data=json.dumps(payload))
-
 
 
 def main():
@@ -82,7 +73,10 @@ def main():
         repository_name, pr
     )
 
-    headers = {"Accept": "application/vnd.github.v3+json"}
+    headers = {
+        "Accept": "application/vnd.github.v3+json",
+        "Authorization": "Bearer " + str(github),
+    }
 
     resp = requests.get(url=url, headers=headers)
     data = resp.json()
@@ -91,4 +85,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
