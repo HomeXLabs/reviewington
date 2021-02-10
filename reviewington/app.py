@@ -1,6 +1,8 @@
 import datetime
-from diff2html import diff2html
+
+from reviewington.diff2html import diff2html
 from flask import Flask, render_template, request
+
 import markdown
 import subprocess
 
