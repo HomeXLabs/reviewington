@@ -16,7 +16,7 @@ def recurse_setdefault(res, array, currentPath):
     elif len(array) == 1:
         res[(array[0], ''.join([currentPath, '/', array[0]]))] = {}
     else:
-        recurse_setdefault(res.setdefault((array[0], currentPath + '/' + array[0]), {}), array[1:], ''.join([currentPath, '/', array[0]]))
+        recurse_setdefault(res.setdefault((array[0], ''.join([currentPath, '/', array[0]]), {}), array[1:], ''.join([currentPath, '/', array[0]]))
 
 
 res = {}
