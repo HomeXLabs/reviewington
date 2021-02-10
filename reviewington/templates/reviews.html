@@ -9,17 +9,24 @@
   </head>
   <body>
     <div class="markdown-body" style="padding-left: 5px">
-      <h1><a href="/">Reviewington</a></h1>
+      <h1>
+        <a href="/" style="color: black">Reviewington</a>
+        <a style="padding-left: 5px; font-size: 12px; color: grey"
+          >{{request.args.get('filepath', '')}}</a
+        >
+      </h1>
     </div>
     <div class="search-controls">
       <form>
+        {% if request.args.get('filepath') %}
         <input
           hidden
           type="text"
-          id="review-filename"
-          name="filename"
-          value="{{ request.args.get('filename') }}"
+          id="review-filepath"
+          name="filepath"
+          value="{{ request.args.get('filepath') }}"
         /><br />
+        {% endif %}
         <div class="wrapper">
           <img
             class="search-icon"
