@@ -5,7 +5,10 @@ import markdown
 import subprocess
 
 # TODO: replace with fetched input
-out = subprocess.check_output(['git', 'ls-tree', '--full-tree', '-r', '--name-only', 'HEAD'])
+out = subprocess.check_output(
+    ["git", "ls-tree", "--full-tree", "-r", "--name-only", "HEAD"]
+)
+
 
 def recurse_setdefault(res, array):
     if len(array) == 0:
@@ -14,6 +17,7 @@ def recurse_setdefault(res, array):
         res[array[0]] = {}
     else:
         recurse_setdefault(res.setdefault(array[0], {}), array[1:])
+
 
 res = {}
 for f in out.decode("utf-8").splitlines():
@@ -31,32 +35,46 @@ TAGS = [
     {"id": "suggestion", "name": "Suggestion"},
     {"id": "nitpick", "name": "Nitpick"},
     {"id": "guide", "name": "Guide"},
+    {"id": "none", "name": "None"},
 ]
 
 
 def getHtml(diffData, path):
     return diff2html(diffData, path)
 
+
 def searchMatch(params):
     filename = params.get("filename")
     search_query = params.get("search")
+    missing_tag_allowed = False
     valid_tags = []
     for tag in TAGS:
         tag_val = params.get(tag["id"])
         if tag_val:
             valid_tags.append(tag["id"])
+            if tag["id"] == "none":
+                missing_tag_allowed = True
 
     def filterComments(comment):
         return search_query.lower() in comment["body"].lower()
-        
+
     return lambda comment: (
-        (len(valid_tags) == 0 or comment["tag"] in valid_tags)
+        (
+            len(valid_tags) == 0
+            or comment["tag"] in valid_tags
+            or (missing_tag_allowed and len(comment["tag"]) == 0)
+        )
         and (comment["path"] == filename)
-        and (search_query.lower() in comment["diffHunk"].lower() or len(list(filter(filterComments, comment["comments"]))) > 0))  # TODO: Check that the comment matches search_query.
+        and (
+            search_query.lower() in comment["diffHunk"].lower()
+            or len(list(filter(filterComments, comment["comments"]))) > 0
+        )
+    )
+
 
 @app.route("/", methods=["GET"])
 def index():
-    return render_template("index.html", files = res)
+    return render_template("index.html", files=res)
 
 
 @app.route("/reviews", methods=["GET"])
@@ -83,7 +101,7 @@ def reviews():
                             },
                             "body": markdown.markdown(
                                 "Great *stuff*!\n Have you tried ```print('Hello, world')```? ",
-                                extensions=['fenced_code'],
+                                extensions=["fenced_code"],
                             ).replace("\n", "<br/>"),
                             "created_at": datetime.datetime.strptime(
                                 "2011-04-14T16:00:49Z", "%Y-%m-%dT%H:%M:%SZ"
