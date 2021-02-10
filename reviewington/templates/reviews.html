@@ -22,7 +22,7 @@
           type="text"
           id="review-search"
           name="search"
-          value="{{ request.args.get('search') }}"
+          value="{{ request.args.get('search', '') }}"
         /><br />
         {% for tag in tags %}
         <input
