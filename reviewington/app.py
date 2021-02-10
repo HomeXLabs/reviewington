@@ -82,7 +82,7 @@ def reviews():
                             },
                             "body": markdown.markdown(
                                 "Great *stuff*!\n Have you tried ```print('Hello, world')```? ",
-                                extensions=[FencedCodeExtension()],
+                                extensions=['fenced_code'],
                             ).replace("\n", "<br/>"),
                             "created_at": datetime.datetime.strptime(
                                 "2011-04-14T16:00:49Z", "%Y-%m-%dT%H:%M:%SZ"
