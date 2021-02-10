@@ -2,7 +2,22 @@ import datetime
 from diff2html import diff2html
 from flask import Flask, render_template, request
 import markdown
-from markdown.extensions.fenced_code import FencedCodeExtension
+import subprocess
+
+# TODO: replace with fetched input
+out = subprocess.check_output(['git', 'ls-tree', '--full-tree', '-r', '--name-only', 'HEAD'])
+
+def recurse_setdefault(res, array):
+    if len(array) == 0:
+        return
+    elif len(array) == 1:
+        res[array[0]] = {}
+    else:
+        recurse_setdefault(res.setdefault(array[0], {}), array[1:])
+
+res = {}
+for f in out.decode("utf-8").splitlines():
+    recurse_setdefault(res, f.split("/"))
 
 app = Flask(__name__, template_folder="templates")
 
@@ -38,10 +53,9 @@ def searchMatch(params):
         and (True)  # TODO: Check that the comment matches search_query.
     )
 
-
 @app.route("/", methods=["GET"])
 def index():
-    return render_template("index.html")
+    return render_template("index.html", files = res)
 
 
 @app.route("/reviews", methods=["GET"])
