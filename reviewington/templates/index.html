@@ -10,10 +10,19 @@
       rel="stylesheet"
       href="{{ url_for('static', filename='css/main.css') }}"
     />
+    <script>
+      function toggleAll(value) {
+        for (const element of document.querySelectorAll(".toggle")) {
+          element.checked = value;
+        }
+      }
+    </script>
   </head>
   <body>
     <div class="markdown-body" style="padding-left: 5px">
       <h1>Reviewington</h1>
+      <button onclick="toggleAll(true)">Expand All</button>
+      <button onclick="toggleAll(false)">Collapse All</button><br />
       <a style="float: left; clear: left; padding: 1px" href="/reviews">.</a>
       {% for (filename, filepath), subfiles in files.items() recursive %} {% if
       subfiles %}
