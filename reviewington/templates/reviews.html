@@ -80,8 +80,16 @@
         <div class="markdown-body">
           {% for comment in discussion.comments %}
           <div class="comment">
-            <h4>{{ comment.user.login }}</h4>
-            <h6>{{ comment.created_at.strftime('%B %d, %Y %I:%M %p') }}</h6>
+            <h4>
+              <a class="comment-user" href="{{ comment.user.url }}"
+                >{{ comment.user.login }}</a
+              >
+            </h4>
+            <h6>
+              <a class="comment-link" href="{{ comment.url }}"
+                >{{ comment.created_at.strftime('%B %d, %Y %I:%M %p') }}</a
+              >
+            </h6>
             <div class="comment-body">{{ comment.body|safe }}</div>
           </div>
           {% endfor %}

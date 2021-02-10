@@ -106,6 +106,7 @@ def reviews():
                     ),
                     "comments": [
                         {
+                            "url": "https://comment-url.com",
                             "user": {
                                 "login": "octocat",
                                 "url": "https://api.github.com/users/octocat",
@@ -119,6 +120,7 @@ def reviews():
                             ),
                         },
                         {
+                            "url": "https://comment-url.com",
                             "user": {
                                 "login": "octodog",
                                 "url": "https://api.github.com/users/octocat",

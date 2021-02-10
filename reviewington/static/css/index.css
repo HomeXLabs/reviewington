@@ -457,6 +457,14 @@ h1 {
   padding: 2px;
 }
 
+.markdown-body .comment h4 a.comment-user {
+  color: black;
+}
+
+.markdown-body .comment h6 a.comment-link {
+  color: grey;
+}
+
 .discussion .comment .comment-body {
   padding: 2px;
 }
