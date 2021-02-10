@@ -37,7 +37,6 @@ TAGS = [
 def getHtml(diffData, path):
     return diff2html(diffData, path)
 
-
 def searchMatch(params):
     filename = params.get("filename")
     search_query = params.get("search")
@@ -47,11 +46,13 @@ def searchMatch(params):
         if tag_val:
             valid_tags.append(tag["id"])
 
+    def filterComments(comment):
+        return search_query.lower() in comment["body"].lower()
+
     return lambda comment: (
         (len(valid_tags) == 0 or comment["tag"] in valid_tags)
         and (comment["path"] == filename)
-        and (True)  # TODO: Check that the comment matches search_query.
-    )
+        and (search_query.lower() in comment["diffHunk"].lower() or len(list(filter(filterComments, comment["comments"]))) > 0))  # TODO: Check that the comment matches search_query.
 
 @app.route("/", methods=["GET"])
 def index():
