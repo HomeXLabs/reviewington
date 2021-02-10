@@ -435,6 +435,8 @@ h1 {
 .discussion .file-header {
   padding: 5px;
   background: #f2f2f2;
+  font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace;
+  font-size: 12px;
 }
 
 .discussion .file-header a {
