@@ -8,12 +8,10 @@
     />
   </head>
   <body>
-    <div class="markdown-body" style="padding-left: 5px">
+    <div class="markdown-body">
       <h1>
-        <a href="/" style="color: black">Reviewington</a>
-        <a style="padding-left: 5px; font-size: 12px; color: grey"
-          >{{request.args.get('filepath', '')}}</a
-        >
+        <a href="/">Reviewington</a>
+        <span class="title-filepath">{{request.args.get('filepath', '')}}</span>
       </h1>
     </div>
     <div class="search-controls">
@@ -42,7 +40,7 @@
           />
         </div>
         <br />
-        <div class="markdown-body" style="padding-left: 5px">
+        <div class="markdown-body">
           {% for tag in tags %}
           <label class="container"
             >{{ tag.name }}
@@ -65,43 +63,26 @@
             <span class="checkmark"></span>
           </label>
           {% endfor %}
-          <input
-            class="button"
-            type="submit"
-            value="Submit"
-            style="margin-left: 5px"
-          />
+          <input class="button" type="submit" value="Submit" />
         </div>
         <br />
       </form>
     </div>
     <div class="discussions">
       {% for discussion in discussions %}
-      <div style="border: solid #dadada; border-width: 1px">
-        <div class="file-header" style="padding: 5px; background: #f2f2f2">
+      <div class="discussion">
+        <div class="file-header">
           {# TODO: Link to the file? #} {{ discussion.path }}
         </div>
-        <hr style="color: #dadada; margin: 0px" />
-        <div
-          style="
-            font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo,
-              monospace;
-            font-size: 12px;
-          "
-        >
-          {{ discussion.diffHunk|safe }}
-        </div>
-        <hr style="color: #dadada; margin: 0px" />
-        <div class="markdown-body" style="padding: 5px">
+        <hr />
+        <div class="diff">{{ discussion.diffHunk|safe }}</div>
+        <hr />
+        <div class="markdown-body">
           {% for comment in discussion.comments %}
-          <div class="comment" style="padding: 2px">
-            <h4 style="color: black; display: inline">
-              {{ comment.user.login }}
-            </h4>
-            <h6 style="color: gray; display: inline; padding-left: 5px">
-              {{ comment.created_at.strftime('%B %d, %Y %I:%M %p') }}
-            </h6>
-            <div style="padding: 2px">{{ comment.body|safe }}</div>
+          <div class="comment">
+            <h4>{{ comment.user.login }}</h4>
+            <h6>{{ comment.created_at.strftime('%B %d, %Y %I:%M %p') }}</h6>
+            <div class="comment-body">{{ comment.body|safe }}</div>
           </div>
           {% endfor %}
         </div>
