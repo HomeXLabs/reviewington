@@ -22,7 +22,7 @@ python3 setup.py bdist_wheel
 pip3 install dist/<YOU_PACAKGE_NAME>
 
 e.g.
-pip install dist/reviewington-0.0.1-py3-none-any.whl
+pip3 install dist/reviewington-0.0.1-py3-none-any.whl
 ```
 4. You can run any `rton` commands
 
