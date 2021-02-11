@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style>
+      html,
+      body {
+        height: 100%;
+      }
+
+      html {
+        display: table;
+        margin: auto;
+      }
+
+      body {
+        display: table-cell;
+        vertical-align: middle;
+      }
+    </style>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/index.css') }}"
+    />
+  </head>
+  <body>
+    <div class="content">
+      <!-- TODO: Replace gif with image-->
+      <img src="{{url_for('static', filename='img/Reviewington.gif')}}" />
+      <h1 style="text-align: center">Reviewington</h1>
+      <div style="margin-left: auto; margin-right: auto">
+        <form method="get" action="/files" style="float: left">
+          <button
+            class="button"
+            style="margin-top: 8px; font-size: 20px; width: 200px"
+            type="submit"
+          >
+            Explore Files
+          </button>
+        </form>
+        <form method="get" action="/reviews" style="float: right">
+          <button
+            class="button"
+            style="margin-top: 8px; font-size: 20px; width: 200px"
+            type="submit"
+          >
+            All Reviews
+          </button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

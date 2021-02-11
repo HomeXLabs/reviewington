@@ -82,10 +82,13 @@ def searchMatch(params):
     )
 
 
-@app.route("/", methods=["GET"])
-def index():
-    return render_template("index.html", reponame="Reviewington", files=res)
+@app.route("/files", methods=["GET"])
+def files():
+    return render_template("files.html", reponame="Reviewington", files=res)
 
+@app.route("/", methods=["GET"])
+def home():
+    return render_template("home.html")
 
 @app.route("/reviews", methods=["GET"])
 def reviews():

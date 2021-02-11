@@ -12,6 +12,31 @@
       <h1>
         <a href="/">Reviewington</a>
         <span class="title-filepath">{{request.args.get('filepath', '')}}</span>
+        {% if request.args.get('filepath') %}
+        <a
+          style="float: right; font-size: 15px; padding-right: 20px"
+          href="/reviews"
+        >
+          All Reviews
+        </a>
+        {% else %}
+        <a
+          style="
+            float: right;
+            font-size: 15px;
+            padding-right: 20px;
+            color: grey;
+          "
+        >
+          All Reviews
+        </a>
+        {% endif %}
+        <a
+          style="float: right; font-size: 15px; padding-right: 20px"
+          href="/files"
+        >
+          Explore Files
+        </a>
       </h1>
     </div>
     <div class="search-controls">
