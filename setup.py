@@ -18,6 +18,7 @@ setup(
         "reviewington": ["templates/*"],
         "reviewington": ["static/css/*"],
         "reviewington": ["github_templates/*"],
+        "reviewington": ["about.txt"],
     },
     classifiers=[
         "Programming Language :: Python :: 3",
