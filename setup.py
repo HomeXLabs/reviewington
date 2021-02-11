@@ -18,6 +18,7 @@ setup(
         "reviewington": [
             "templates/*",
             "static/css/*",
+            "static/img/*",
             "about.txt",
             "github_action_template/*",
         ],
