@@ -9,11 +9,14 @@ from reviewington.comment import Comment
 
 class CommentBody:
     """Class to store the user and body of a PullRequestComment."""
+
     def __init__(self, comment: Comment):
         self.user_login = comment.user_login
         self.user_html_url = comment.user_html_url
         self.user = {"login": self.user_login, "url": self.user_html_url}
-        self.body = markdown.markdown(comment.body, extension=["fenced_code"]).replace("\n", "<br/>")
+        self.body = markdown.markdown(comment.body, extension=["fenced_code"]).replace(
+            "\n", "<br/>"
+        )
         self.created_at = comment.created_at
         self.updated_at = comment.updated_at
 

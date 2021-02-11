@@ -2,16 +2,13 @@
 
 ## Usage
 
-Run the program locally using `Flask` command:
-
-`cd` into `reviewington` (inside `reviewington`) and run below command
-
+Run the program locally using following `Flask` command in the root of the repo:
 ```
-FLASK_APP=app.py FLASK_DEBUG=1 python3 -m flask run
+FLASK_APP=reviewington.app FLASK_DEBUG=1 python3 -m flask run
 ```
 
 Run locally using `pip` installable pacakge:
-1. locate to main directory (on the same level as where `setup.py` is located)
+1. Locate the root of the repo (on the same level as where `setup.py` is located).
 
 2. Run below command. You will notice `dist` directory being created.
 ```
