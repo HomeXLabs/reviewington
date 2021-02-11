@@ -16,7 +16,7 @@ jobs:
 
       # Runs a script file using a runners shell
       - name: parse-review-comments
-        uses: HomeXLabs/review-comment-etiquette-action@v1.0.3
+        uses: HomeXLabs/review-comment-etiquette-action@v1.0.1
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
 
