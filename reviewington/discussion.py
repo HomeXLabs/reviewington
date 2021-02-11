@@ -5,6 +5,7 @@ import markdown
 from github.PullRequestComment import PullRequestComment
 
 from reviewington.comment import Comment
+from reviewington.diff2html import diff2html
 
 
 class CommentBody:
@@ -35,5 +36,5 @@ class Discussion:
         self.html_url = self.head_comment.html_url
         self.path = self.head_comment.path
         self.tag = "null"
-        self.diff_hunk = self.head_comment.diff_hunk
+        self.diff_hunk = diff2html(self.head_comment.diff_hunk, self.path)
         self.comments = [CommentBody(c) for c in comments]

@@ -100,7 +100,7 @@
           <a href="{{ discussion.urlToPath }}">{{ discussion.path }}</a>
         </div>
         <hr />
-        <div class="diff">{{ discussion.diffHunk|safe }}</div>
+        <div class="diff">{{ discussion.diff_hunk|safe }}</div>
         <hr />
         <div class="markdown-body">
           {% for comment in discussion.comments %}
@@ -112,7 +112,7 @@
             </h4>
             <h6>
               <a class="comment-link" href="{{ comment.url }}"
-                >{{ comment.created_at.strftime('%B %d, %Y %I:%M %p') }}</a
+                >{{ comment.created_at }}</a
               >
             </h6>
             <div class="comment-body">{{ comment.body|safe }}</div>
