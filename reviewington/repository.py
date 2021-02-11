@@ -1,6 +1,6 @@
 import os
 from github import Github
-from comment import Comment
+from reviewington.comment import Comment
 
 from dotenv import load_dotenv
 
@@ -20,6 +20,7 @@ class Repository:
 
     def __init__(self, repo_id):
         self.repo = Repository.github.get_repo(repo_id)
+        self.name = self.repo.full_name
 
     def get_pr_comments(self):
         pr_comments = self.repo.get_pulls_review_comments()

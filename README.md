@@ -48,3 +48,25 @@ venv/bin/pip install pip-tools
 venv/bin/python -m piptools compile
 venv/bin/python -m piptools sync
 ```
+
+## Contributing
+
+Development on the latest version of Python is preferred. As of this writing we are using `python 3.9`.
+You can use any operating system, however the development team uses MacOS so there might be some slight differences to get setup.
+
+Make sure you do all the development work in a virtual environment setup using:
+
+```console
+python -m virtualenv venv
+venv/bin/pip install -r requirements.txt
+```
+
+Before submitting pull requests, run lints and tests with the following commands from the root of the reviewington repo:
+
+```console
+# Linting using black
+black .
+
+# Unit tests
+venv/bin/python -m unittest
+```
