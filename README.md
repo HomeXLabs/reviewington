@@ -19,7 +19,7 @@ python3 setup.py bdist_wheel
 ```
 3. Run below command to install your package locally
 ```
-pip3 install dist/<YOU_PACAKGE_NAME>
+pip3 install dist/<YOU_PACKAGE_NAME>
 
 e.g.
 pip3 install dist/reviewington-0.0.1-py3-none-any.whl

@@ -1,0 +1,13 @@
+name: Reviewington
+on:
+  pull_request_review_comment:
+    types: [created, edited]
+jobs:
+  reviewington:
+    name: reviewington check
+    runs-on: ubuntu-latest
+    steps:
+      -name: 'review comment etiquette'
+       uses: HomexLabs/review-comment-etiquette-action@v1
+       with: 
+         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
