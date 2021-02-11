@@ -3,7 +3,7 @@ from typing import List
 from pathlib import Path
 from github import Github
 from reviewington.comment import Comment
-from reviewington.discussion import Discussion
+from reviewington.repo_file import RepoFile
 
 from dotenv import load_dotenv
 
@@ -30,13 +30,18 @@ class Repository:
         pr_comments = self.repo.get_pulls_review_comments()
         return [Comment(c) for c in pr_comments]
 
-    def get_pr_discussions(self) -> List[Discussion]:
-        pr_comments = self.get_pr_comments()
-        discussions = {}
-        for comment in pr_comments:
-            if comment.diff_hunk not in discussions:
-                discussions[comment.diff_hunk] = [comment]
-            else:
-                discussions[comment.diff_hunk].append(comment)
+    def get_repo_contents(self):
+        filenames = []
 
-        return [Discussion(comments) for comments in discussions.values()]
+        contents = self.repo.get_contents("")
+        while contents:
+            file_content = contents.pop(0)
+            if file_content.type == "dir":
+                contents.extend(self.repo.get_contents(file_content.path))
+            else:
+                filenames.append(RepoFile(file_content))
+
+        return filenames
+
+    def get_repo_filenames(self):
+        return [f.path for f in self.get_repo_contents()]
