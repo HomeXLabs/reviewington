@@ -6,8 +6,44 @@
       rel="stylesheet"
       href="{{ url_for('static', filename='css/index.css') }}"
     />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/main.css') }}"
+    />
   </head>
   <body>
-    <a href="/reviews?filename=example.ts">example.ts</a>
+    <div class="markdown-body" style="padding-left: 5px">
+      <h1>Reviewington</h1>
+      <a style="float: left; clear: left; padding: 1px" href="/reviews">.</a>
+      {% for (filename, filepath), subfiles in files.items() recursive %} {% if
+      subfiles %}
+      <div class="wrap-collabsible" style="float: left; clear: left">
+        <input id="collapsible_{{filepath}}" class="toggle" type="checkbox" />
+        <label
+          for="collapsible_{{filepath}}"
+          class="lbl-toggle"
+          style="float: left; clear: left"
+          >{{filename}}</label
+        >
+        <div
+          class="collapsible-content"
+          style="padding: 0px 0px 0px 10px; float: left; clear: left"
+        >
+          <a
+            style="float: left; clear: left; padding: 1px"
+            href="/reviews?filepath={{filepath}}"
+            >.</a
+          >
+          {{ loop(subfiles.items()) }}
+        </div>
+      </div>
+      {% else %}
+      <a
+        style="float: left; clear: left; padding: 1px"
+        href="/reviews?filepath={{filepath}}"
+        >{{filename}}</a
+      >
+      {% endif %} {% endfor %}
+    </div>
   </body>
 </html>

@@ -1,7 +1,7 @@
 import os
 from github import Github
-from comment import Comment
-from repo_file import RepoFile
+from reviewington.comment import Comment
+from reviewington.repo_file import RepoFile
 
 from dotenv import load_dotenv
 
@@ -15,11 +15,13 @@ def get_remote_info():
     repo_name = os.getenv("REPO_NAME")
     return f"{org_name}/{repo_name}"
 
+
 class Repository:
     github = Github(os.getenv("GITHUB_PAT"))
 
     def __init__(self, repo_id):
         self.repo = Repository.github.get_repo(repo_id)
+        self.name = self.repo.full_name
 
     def get_pr_comments(self):
         pr_comments = self.repo.get_pulls_review_comments()

@@ -1,0 +1,22 @@
+# this workflow will check the format of review comments
+
+name: review_checker
+
+# Controls when the action will run. 
+on:
+  pull_request_review_comment:
+    types: [created, edited]
+
+jobs:
+  review_checker:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      # Runs a script file using a runners shell
+      - name: parse-review-comments
+        uses: HomeXLabs/review-comment-etiquette-action@v1.0.1
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
+

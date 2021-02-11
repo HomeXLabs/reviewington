@@ -8,43 +8,71 @@
     />
   </head>
   <body>
+    <div class="markdown-body" style="padding-left: 5px">
+      <h1>
+        <a href="/" style="color: black">Reviewington</a>
+        <a style="padding-left: 5px; font-size: 12px; color: grey"
+          >{{request.args.get('filepath', '')}}</a
+        >
+      </h1>
+    </div>
     <div class="search-controls">
       <form>
+        {% if request.args.get('filepath') %}
         <input
           hidden
           type="text"
-          id="review-filename"
-          name="filename"
-          value="{{ request.args.get('filename') }}"
+          id="review-filepath"
+          name="filepath"
+          value="{{ request.args.get('filepath') }}"
         /><br />
-        <label for="review-search">Search</label>
-        <input
-          type="text"
-          id="review-search"
-          name="search"
-          value="{{ request.args.get('search') }}"
-        /><br />
-        {% for tag in tags %}
-        <input
-          type="checkbox"
-          id="etiquette-{{ tag.id }}"
-          name="{{ tag.id }}"
-          value="true"
-          {%
-          if
-          tag.id
-          in
-          request.args.keys()
-          %}
-          checked
-          {%
-          endif
-          %}
-        />
-        <label for="etiquette-{{ tag.id }}">{{ tag.name }}</label>
-        {% endfor %}
+        {% endif %}
+        <div class="wrapper">
+          <img
+            class="search-icon"
+            src="data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTkuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDU2Ljk2NiA1Ni45NjYiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDU2Ljk2NiA1Ni45NjY7IiB4bWw6c3BhY2U9InByZXNlcnZlIiB3aWR0aD0iMTZweCIgaGVpZ2h0PSIxNnB4Ij4KPHBhdGggZD0iTTU1LjE0Niw1MS44ODdMNDEuNTg4LDM3Ljc4NmMzLjQ4Ni00LjE0NCw1LjM5Ni05LjM1OCw1LjM5Ni0xNC43ODZjMC0xMi42ODItMTAuMzE4LTIzLTIzLTIzcy0yMywxMC4zMTgtMjMsMjMgIHMxMC4zMTgsMjMsMjMsMjNjNC43NjEsMCw5LjI5OC0xLjQzNiwxMy4xNzctNC4xNjJsMTMuNjYxLDE0LjIwOGMwLjU3MSwwLjU5MywxLjMzOSwwLjkyLDIuMTYyLDAuOTIgIGMwLjc3OSwwLDEuNTE4LTAuMjk3LDIuMDc5LTAuODM3QzU2LjI1NSw1NC45ODIsNTYuMjkzLDUzLjA4LDU1LjE0Niw1MS44ODd6IE0yMy45ODQsNmM5LjM3NCwwLDE3LDcuNjI2LDE3LDE3cy03LjYyNiwxNy0xNywxNyAgcy0xNy03LjYyNi0xNy0xN1MxNC42MSw2LDIzLjk4NCw2eiIgZmlsbD0iIzAwMDAwMCIvPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8L3N2Zz4K"
+          />
+          <input
+            placeholder="Search"
+            type="text"
+            class="search"
+            id="review-search"
+            name="search"
+            value="{{ request.args.get('search', '') }}"
+          />
+        </div>
         <br />
-        <input type="submit" value="Submit" />
+        <div class="markdown-body" style="padding-left: 5px">
+          {% for tag in tags %}
+          <label class="container"
+            >{{ tag.name }}
+            <input
+              type="checkbox"
+              id="etiquette-{{ tag.id }}"
+              name="{{ tag.id }}"
+              value="true"
+              {%
+              if
+              tag.id
+              in
+              request.args.keys()
+              %}
+              checked
+              {%
+              endif
+              %}
+            />
+            <span class="checkmark"></span>
+          </label>
+          {% endfor %}
+          <input
+            class="button"
+            type="submit"
+            value="Submit"
+            style="margin-left: 5px"
+          />
+        </div>
+        <br />
       </form>
     </div>
     <div class="discussions">

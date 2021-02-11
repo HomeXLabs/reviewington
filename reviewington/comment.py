@@ -23,4 +23,7 @@ class Comment:
 
     def __str__(self):
         """Returns a string serialized JSON of the comment."""
-        return json.dumps(self.__dict__)
+        return json.dumps(self.to_json())
+
+    def to_json(self):
+        return self.__dict__
