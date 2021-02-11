@@ -66,7 +66,7 @@ def searchMatch(params):
                 valid_tags.append(tag_id)
 
     def filterComments(comment):
-        return search_query.lower() in comment["body"].lower()
+        return search_query.lower() in comment["body"].lower() or search_query.lower() in comment["user"]["login"]
 
     return lambda comment: (
         (
