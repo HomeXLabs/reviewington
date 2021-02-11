@@ -1,6 +1,6 @@
-from typing import List
 import os
-
+from typing import List
+from pathlib import Path
 from github import Github
 from reviewington.comment import Comment
 from reviewington.discussion import Discussion
@@ -9,21 +9,22 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# WIP Just using local .env for now
-def get_remote_info():
-    """Get the org and repo name from git remote origin."""
-
-    org_name = os.getenv("ORG_NAME")
-    repo_name = os.getenv("REPO_NAME")
-    return f"{org_name}/{repo_name}"
-
 
 class Repository:
-    github = Github(os.getenv("GITHUB_PAT"))
+    def __init__(self, repo_id):
+        self.github = Github(self.get_github_pat())
+        self.repo = self.github.get_repo(repo_id)
+        self.name = self.repo.full_name
 
-    def __init__(self, repo_id: str):
-        self.repo = Repository.github.get_repo(repo_id)
-        self.pr_discussions = self.get_pr_discussions()
+    def get_github_pat(self):
+        home = str(Path.home())
+        with open(f"{home}/.reviewington/config") as f:
+            credentials_content = f.read()
+
+        key, value = credentials_content.split(":")
+        github_pat = value.strip()
+
+        return github_pat
 
     def get_pr_comments(self) -> List[Comment]:
         pr_comments = self.repo.get_pulls_review_comments()
@@ -39,9 +40,3 @@ class Repository:
                 discussions[comment.diff_hunk].append(comment)
 
         return [Discussion(comments) for comments in discussions.values()]
-
-
-if __name__ == "__main__":
-    repo = Repository(get_remote_info())
-    for comment in repo.get_pr_comments():
-        print(comment)
