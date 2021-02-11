@@ -1,11 +1,13 @@
 import datetime
+import os
+import subprocess
 
-from reviewington.diff2html import diff2html
 from flask import Flask, render_template, request
 
-import markdown
-import subprocess
-import os
+from reviewington.diff2html import diff2html
+from reviewington.repository import Repository
+from reviewington.search import search_discussions
+from reviewington.tags import TAGS, TAG_IDS
 
 # TODO: replace with fetched input
 out = subprocess.check_output(
@@ -30,21 +32,13 @@ res = {}
 for f in out.decode("utf-8").splitlines():
     recurse_setdefault(res, f.split("/"), "/")
 
-
 app = Flask(__name__, template_folder="templates")
-
-
-TAGS = [
-    {"id": "change", "name": "Change"},
-    {"id": "question", "name": "Question"},
-    {"id": "concern", "name": "Concern"},
-    {"id": "discussion", "name": "Discussion"},
-    {"id": "praise", "name": "Praise"},
-    {"id": "suggestion", "name": "Suggestion"},
-    {"id": "nitpick", "name": "Nitpick"},
-    {"id": "guide", "name": "Guide"},
-    {"id": "none", "name": "None"},
-]
+global session
+session = {}
+if "repo" not in session:
+    session["repo"] = Repository(os.environ["GITHUB_ORG_REPO"])
+if "discussions" not in session:
+    session["discussions"] = session["repo"].pr_discussions
 
 
 def getHtml(diffData, path):
@@ -90,8 +84,11 @@ def files():
 def home():
     return render_template("home.html")
 
+
 @app.route("/reviews", methods=["GET"])
 def reviews():
+    selected_tags = list(set(request.args.keys()) & set(TAG_IDS))
+
     return render_template(
         "reviews.html",
         tags=TAGS,
