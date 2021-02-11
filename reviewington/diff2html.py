@@ -80,7 +80,7 @@ def makeBlocks(diff):
                 pass
             numbers = list(map(lambda n: int(n), numbers))
             leftLine = numbers[0]
-            rightLine = numbers[0]
+            rightLine = numbers[2]
             num = num + 1
             if len(blocks) > 0:
                 blocks.append((separator, separator, separator, separator))
