@@ -149,7 +149,10 @@ bg_del = "#ffdce0"
 
 
 def text2html(filename, plain):
-    lexer = get_lexer_for_filename(filename)
+    try:
+        lexer = get_lexer_for_filename(filename)
+    except:
+        lexer = get_lexer_for_filename("default.txt")
     formatter = HtmlFormatter(nowrap=True)
     return highlight(plain, lexer, formatter)
 
