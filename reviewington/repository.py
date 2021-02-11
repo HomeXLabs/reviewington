@@ -1,6 +1,9 @@
+from typing import List
 import os
+
 from github import Github
-from comment import Comment
+from reviewington.comment import Comment
+from reviewington.discussion import Discussion
 
 from dotenv import load_dotenv
 
@@ -18,12 +21,24 @@ def get_remote_info():
 class Repository:
     github = Github(os.getenv("GITHUB_PAT"))
 
-    def __init__(self, repo_id):
+    def __init__(self, repo_id: str):
         self.repo = Repository.github.get_repo(repo_id)
+        self.pr_discussions = self.get_pr_discussions()
 
-    def get_pr_comments(self):
+    def get_pr_comments(self) -> List[Comment]:
         pr_comments = self.repo.get_pulls_review_comments()
         return [Comment(c) for c in pr_comments]
+
+    def get_pr_discussions(self) -> List[Discussion]:
+        pr_comments = self.get_pr_comments()
+        discussions = {}
+        for comment in pr_comments:
+            if comment.diff_hunk not in discussions:
+                discussions[comment.diff_hunk] = [comment]
+            else:
+                discussions[comment.diff_hunk].append(comment)
+
+        return [Discussion(comments) for comments in discussions.values()]
 
 
 if __name__ == "__main__":
