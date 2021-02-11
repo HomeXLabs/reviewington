@@ -34,7 +34,7 @@ def setup_github_action():
     )  # this is user's local path
 
     user_action = input(
-        "Press y to create github action file inside your project main directory. This action will create or add template file to .github/workflows directory"
+        "Press y to create github action file inside your project main directory. This action will create or add template file to .github/workflows directory:"
     )
 
     if user_action == "y":
