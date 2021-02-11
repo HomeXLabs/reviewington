@@ -40,6 +40,10 @@ class Repository:
 
         return filenames
 
+    def get_repo_filenames(self):
+        return [f.path for f in self.get_repo_contents()]
+
+
 
 
 if __name__ == "__main__":
@@ -47,5 +51,5 @@ if __name__ == "__main__":
     for comment in repo.get_pr_comments():
         print(comment)
 
-    for filename in repo.get_repo_contents():
+    for filename in repo.get_repo_filenames():
         print(filename)
