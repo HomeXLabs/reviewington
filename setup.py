@@ -17,8 +17,8 @@ setup(
     package_data={
         "reviewington": ["templates/*"],
         "reviewington": ["static/css/*"],
-        "reviewington": ["github_templates/*"],
         "reviewington": ["about.txt"],
+        "reviewington": ["github_action_template/*"],
     },
     classifiers=[
         "Programming Language :: Python :: 3",
