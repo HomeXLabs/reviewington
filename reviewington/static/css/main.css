@@ -25,7 +25,7 @@ input[type="checkbox"] {
   transition: max-height 0.25s ease-in-out;
 }
 .toggle:checked + .lbl-toggle + .collapsible-content {
-  max-height: 350px;
+  max-height: none;
 }
 .toggle:checked + .lbl-toggle {
   border-bottom-right-radius: 0;
