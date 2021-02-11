@@ -15,10 +15,12 @@ setup(
     download_url="https://github.com/HomeXLabs/reviewington",
     package_dir={"reviewington": "reviewington"},
     package_data={
-        "reviewington": ["templates/*"],
-        "reviewington": ["static/css/*"],
-        "reviewington": ["about.txt"],
-        "reviewington": ["github_action_template/*"],
+        "reviewington": [
+            "templates/*",
+            "static/css/*",
+            "about.txt",
+            "github_action_template/*",
+        ],
     },
     classifiers=[
         "Programming Language :: Python :: 3",
