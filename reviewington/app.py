@@ -36,7 +36,7 @@ app = Flask(__name__, template_folder="templates")
 global session
 session = {}
 if "repo" not in session:
-    session["repo"] = Repository("HomeXLabs/reviewington")
+    session["repo"] = Repository(os.environ["GITHUB_ORG_REPO"])
 if "discussions" not in session:
     session["discussions"] = session["repo"].pr_discussions
 
