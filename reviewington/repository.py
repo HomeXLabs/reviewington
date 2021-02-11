@@ -1,6 +1,7 @@
 import os
 from github import Github
 from reviewington.comment import Comment
+from reviewington.repo_file import RepoFile
 
 from dotenv import load_dotenv
 
@@ -26,8 +27,29 @@ class Repository:
         pr_comments = self.repo.get_pulls_review_comments()
         return [Comment(c) for c in pr_comments]
 
+    def get_repo_contents(self):
+        filenames = []
+
+        contents = self.repo.get_contents("")
+        while contents:
+            file_content = contents.pop(0)
+            if file_content.type == "dir":
+                contents.extend(self.repo.get_contents(file_content.path))
+            else:
+                filenames.append(RepoFile(file_content))
+
+        return filenames
+
+    def get_repo_filenames(self):
+        return [f.path for f in self.get_repo_contents()]
+
+
+
 
 if __name__ == "__main__":
     repo = Repository(get_remote_info())
     for comment in repo.get_pr_comments():
         print(comment)
+
+    for filename in repo.get_repo_filenames():
+        print(filename)
