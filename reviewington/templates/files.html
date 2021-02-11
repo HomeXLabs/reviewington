@@ -10,6 +10,10 @@
       rel="stylesheet"
       href="{{ url_for('static', filename='css/main.css') }}"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
     <script>
       function toggleAll(value) {
         for (const element of document.querySelectorAll(".toggle")) {
@@ -52,17 +56,17 @@
         </a>
         <button
           class="button"
-          style="float: left; margin-top: 9px"
+          style="float: left; margin-top: 7px; font-size: 15px"
           onclick="toggleAll(true)"
         >
-          Expand All
+          <i class="fa fa-angle-double-down"></i>
         </button>
         <button
           class="button"
-          style="float: left; margin-top: 9px"
+          style="float: left; margin-top: 7px; font-size: 15px"
           onclick="toggleAll(false)"
         >
-          Collapse All
+          <i class="fa fa-angle-double-up"></i>
         </button>
       </div>
       <br />
