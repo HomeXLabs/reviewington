@@ -6,6 +6,7 @@ from github.PullRequestComment import PullRequestComment
 
 from reviewington.comment import Comment
 from reviewington.diff2html import diff2html
+from reviewington.tags import normalize_tag
 
 
 class CommentBody:
@@ -35,6 +36,6 @@ class Discussion:
         self.pull_request_url = self.head_comment.pull_request_url
         self.html_url = self.head_comment.html_url
         self.path = self.head_comment.path
-        self.tag = "null"
+        self.tag = normalize_tag(self.head_comment.body.split(":")[0])
         self.diff_hunk = diff2html(self.head_comment.diff_hunk, self.path)
         self.comments = [CommentBody(c) for c in comments]
