@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style>
+      html,
+      body {
+        height: 100%;
+      }
+
+      html {
+        display: table;
+        margin: auto;
+      }
+
+      body {
+        display: table-cell;
+        vertical-align: middle;
+      }
+    </style>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/index.css') }}"
+    />
+  </head>
+  <body>
+    <div class="content">
+      <!-- TODO: Replace gif with image-->
+      <img
+        src="{{url_for('static', filename='img/loading.gif')}}"
+        style="display: block; margin: 0 auto; width: 300px"
+      />
+      <h1 style="text-align: center; font-size: 40px">Reviewington</h1>
+      <div style="margin-left: auto; margin-right: auto">
+        <text>Currently Loading API data... Will retry in 2 seconds.</text>
+      </div>
+    </div>
+    <meta http-equiv="refresh" content="2">
+  </body>
+</html>
