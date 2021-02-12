@@ -96,9 +96,7 @@
     <div class="discussions">
       {% for discussion in discussions %}
       <div class="discussion">
-        <div class="file-header">
-          <a href="{{ discussion.urlToPath }}">{{ discussion.path }}</a>
-        </div>
+        <div class="file-header">{{ discussion.path }}</div>
         <hr />
         <div class="diff">{{ discussion.diff_hunk|safe }}</div>
         <hr />
@@ -110,11 +108,7 @@
                 >{{ comment.user.login }}</a
               >
             </h4>
-            <h6>
-              <a class="comment-link" href="{{ comment.url }}"
-                >{{ comment.created_at }}</a
-              >
-            </h6>
+            <h6>{{ comment.created_at }}</h6>
             <div class="comment-body">{{ comment.body|safe }}</div>
           </div>
           {% endfor %}
