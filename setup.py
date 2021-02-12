@@ -7,7 +7,7 @@ setup(
     packages=setuptools.find_packages(),
     scripts=["rton"],
     license="MIT",
-    version="0.0.5",
+    version="1.0.0",
     description="Reviewington gives you wings when reviewing code",  # change later
     author="HomeX",
     author_email="reviewington@homex.com",
