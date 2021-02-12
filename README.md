@@ -1,4 +1,4 @@
-<img src="https://user-images.githubusercontent.com/70149795/107785177-45a5c080-6d1a-11eb-9daa-31b405e706b1.png" style="width: 150px" />
+<img src="https://user-images.githubusercontent.com/70149795/107785177-45a5c080-6d1a-11eb-9daa-31b405e706b1.png" width=150 />
 
 # [Reviewington](https://homexlabs.github.io/reviewington/)
 
