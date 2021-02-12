@@ -22,7 +22,7 @@ if "filenames" not in session:
 
 @app.route("/files", methods=["GET"])
 def files():
-    return render_template("files.html", reponame="Reviewington", files=session["filenames"])
+    return render_template("files.html", reponame=session["repo"].name, files=session["filenames"])
 
 
 @app.route("/", methods=["GET"])
