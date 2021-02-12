@@ -1,29 +1,38 @@
-# Reviewington
+![Reviewington logo](https://raw.githubusercontent.com/HomeXLabs/reviewington/main/reviewington/static/img/Reviewington.png)
+
+# [Reviewington](https://homexlabs.github.io/reviewington/)
 
 ## Usage
 
 Run the program locally using following `Flask` command in the root of the repo:
+
 ```
 FLASK_APP=reviewington.app FLASK_DEBUG=1 python3 -m flask run
 ```
 
 Run locally using `pip` installable pacakge:
+
 1. Locate the root of the repo (on the same level as where `setup.py` is located).
 
 2. Run below command. You will notice `dist` directory being created.
+
 ```
 python3 setup.py bdist_wheel
 ```
+
 3. Run below command to install your package locally
+
 ```
 pip3 install dist/<YOU_PACKAGE_NAME>
 
 e.g.
 pip3 install dist/reviewington-0.0.1-py3-none-any.whl
 ```
+
 4. You can run any `rton` commands
 
 Examples:
+
 ```
 rton run HomeXLabs/reviewington
 rton configure
@@ -78,6 +87,7 @@ Make sure you copy the token so that you can use it when you configure reviewing
 ## PyPi deployment
 
 To deploy run the following commands to upload a build distribution to pypi. Use `__token__` for a username and use your own PyPi API token as a password.
+
 ```
 python3 -m pip install --user --upgrade twine
 python3 setup.py bdist_wheel
