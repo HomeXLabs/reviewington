@@ -1,7 +1,9 @@
 import os
 from typing import List
 from pathlib import Path
+
 from github import Github
+from github.GithubException import UnknownObjectException
 
 from reviewington.comment import Comment
 from reviewington.discussion import Discussion
@@ -10,18 +12,30 @@ from reviewington.repo_file import recurse_setdefault, RepoFile
 class Repository:
     def __init__(self, repo_id):
         self.github = Github(self.get_github_pat())
-        self.repo = self.github.get_repo(repo_id)
+        self.repo = self.get_git_repo(repo_id)
         self.name = self.repo.full_name
 
     def get_github_pat(self):
         home = str(Path.home())
-        with open(f"{home}/.reviewington/config") as f:
-            credentials_content = f.read()
+        try:
+            with open(f"{home}/.reviewington/config") as f:
+                credentials_content = f.read()
+        except IOError:
+            return None
 
-        key, value = credentials_content.split(":")
+        _, value = credentials_content.split(":")
         github_pat = value.strip()
 
         return github_pat
+
+    def get_git_repo(self, repo_id):
+        """Gets github repo object unless Github Personal Access Token doesn't have permissions."""
+        try:
+            return self.github.get_repo(repo_id)
+        except UnknownObjectException as e:
+            print(e)
+            print("Cannot find Github repo, if it's a private repo check if PAT has permissions.")
+            exit(-1)
 
     def get_pr_comments(self) -> List[Comment]:
         pr_comments = self.repo.get_pulls_review_comments()
