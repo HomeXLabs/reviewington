@@ -7,7 +7,7 @@ setup(
     packages=setuptools.find_packages(),
     scripts=["rton"],
     license="MIT",
-    version="0.0.1",
+    version="0.0.5",
     description="Reviewington gives you wings when reviewing code",  # change later
     author="HomeX",
     author_email="reviewington@homex.com",
@@ -28,9 +28,10 @@ setup(
         "License :: OSI Approved :: MIT License",
     ],
     install_requires=[
-    "flask>=1.1",
-    "markdown>=3.3",
-    "pygithub>=1.54",
-  ],
+        "flask>=1.1",
+        "Markdown>=3.3.3",
+        "PyGithub>=1.54.1",
+        "Pygments>=2.7.4",
+    ],
     python_requires=">=3.6",
 )

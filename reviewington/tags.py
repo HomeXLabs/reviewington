@@ -1,3 +1,5 @@
+import re
+
 TAGS = [
     {"id": "change", "name": "Change"},
     {"id": "question", "name": "Question"},
@@ -11,3 +13,10 @@ TAGS = [
 ]
 
 TAG_IDS = [tag["id"] for tag in TAGS]
+
+
+def normalize_tag(tag):
+    """Lowercase the tag and removes special chars."""
+    tag = tag.lower()
+    tag = re.sub("[^A-Za-z0-9]+", "", tag)
+    return tag

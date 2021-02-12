@@ -67,3 +67,19 @@ black .
 # Unit tests
 venv/bin/python -m unittest
 ```
+
+## Reviewington on Private Repo
+
+Get an Github Personal Access Token from https://github.com/settings/tokens/new
+and make sure that it has "repo" scope selected.
+
+Make sure you copy the token so that you can use it when you configure reviewington with `rton configure`.
+
+## PyPi deployment
+
+To deploy run the following commands to upload a build distribution to pypi. Use `__token__` for a username and use your own PyPi API token as a password.
+```
+python3 -m pip install --user --upgrade twine
+python3 setup.py bdist_wheel
+python3 -m twine upload --repository testpypi dist/*
+```
