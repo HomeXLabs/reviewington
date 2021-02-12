@@ -431,6 +431,7 @@ h1 {
   border: solid #dadada;
   border-width: 1px;
   border-radius: 6px;
+  margin: 10px 0;
 }
 
 .discussion .file-header {
