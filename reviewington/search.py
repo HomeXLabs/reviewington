@@ -32,10 +32,7 @@ def has_code_search_match(discussion: Discussion, search_query: str) -> bool:
 def has_search_match(discussion: Discussion, search_query: str) -> bool:
     """Returns discussions that satisfy the search criteria."""
     sq = search_query.lower()
-    return (
-        has_comment_search_match(discussion, sq)
-        or has_code_search_match(discussion, sq)
-    )
+    return has_comment_search_match(discussion, sq) or has_code_search_match(discussion, sq)
 
 
 def search_discussions(

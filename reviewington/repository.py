@@ -5,7 +5,7 @@ from github import Github
 
 from reviewington.comment import Comment
 from reviewington.discussion import Discussion
-from reviewington.repo_file import RepoFile
+from reviewington.repo_file import recurse_setdefault, RepoFile
 
 class Repository:
     def __init__(self, repo_id):
@@ -52,4 +52,9 @@ class Repository:
         return filenames
 
     def get_repo_filenames(self):
-        return [f.path for f in self.get_repo_contents()]
+        """Create a tree structure by recursively nesting the filepaths."""
+        res = {}
+        filenames = [f.path for f in self.get_repo_contents()]
+        for f in filenames:
+            recurse_setdefault(res, f.split("/"), "/")
+        return res

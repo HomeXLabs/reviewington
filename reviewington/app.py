@@ -8,28 +8,6 @@ from reviewington.repository import Repository
 from reviewington.search import search_discussions
 from reviewington.tags import TAGS, TAG_IDS
 
-# TODO: replace with fetched input
-out = subprocess.check_output(
-    ["git", "ls-tree", "--full-tree", "-r", "--name-only", "HEAD"]
-)
-
-
-def recurse_setdefault(res, array, currentPath):
-    if len(array) == 0:
-        return
-    elif len(array) == 1:
-        res[(array[0], os.path.join(currentPath, array[0]))] = {}
-    else:
-        recurse_setdefault(
-            res.setdefault((array[0], os.path.join(currentPath, array[0])), {}),
-            array[1:],
-            os.path.join(currentPath, array[0]),
-        )
-
-
-res = {}
-for f in out.decode("utf-8").splitlines():
-    recurse_setdefault(res, f.split("/"), "/")
 
 app = Flask(__name__, template_folder="templates")
 global session
@@ -38,11 +16,14 @@ if "repo" not in session:
     session["repo"] = Repository(os.environ["GITHUB_ORG_REPO"])
 if "discussions" not in session:
     session["discussions"] = session["repo"].get_pr_discussions()
+if "filenames" not in session:
+    session["filenames"] = session["repo"].get_repo_filenames()
 
 
 @app.route("/files", methods=["GET"])
 def files():
-    return render_template("files.html", reponame="Reviewington", files=res)
+    return render_template("files.html", reponame="Reviewington", files=session["filenames"])
+
 
 @app.route("/", methods=["GET"])
 def home():
