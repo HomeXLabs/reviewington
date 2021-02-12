@@ -2,8 +2,79 @@
 <html lang="en">
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css" href="index.css" />
   </head>
   <body>
-    <p>Hello World!</p>
+    <img class="logo" src="Reviewington.png" alt="Reviewington logo" />
+    <h1>Reviewington</h1>
+    <p class="intro">
+      Reviewington is an open source tool that lets you search through all pull
+      request comments in a GitHub repository. This makes it quick and easy to
+      find previous discussions that can help you better understand the code!
+    </p>
+    <div class="button-container">
+      <a class="action-button" href="https://github.com/HomeXLabs/reviewington"
+        >Get Reviewington</a
+      >
+      <a
+        class="action-button"
+        href="https://github.com/marketplace/actions/parse-review-comments"
+        >Get the Parse Review Comments GitHub action</a
+      >
+    </div>
+    <div class="feature-container odd-container">
+      <p class="feature-para">
+        View all review comments in your repository. Reviewington runs locally
+        and uses your GitHub account, so you can use it in private repositories
+        with the knowledge that you aren't compromising on security.
+      </p>
+      <img
+        class="feature-screenshot"
+        alt="Screenshot of Reviewington discussions screen."
+        src="discussions.png"
+      />
+    </div>
+    <div class="feature-container even-container">
+      <img
+        class="feature-screenshot"
+        alt="Screenshot of Reviewington's file tree."
+        src="filetree.png"
+      />
+      <p class="feature-para">
+        Search for comments by file or directory. Filter out the comments you
+        aren't interested in so you can find what you're looking for quickly.
+      </p>
+    </div>
+    <div class="feature-container odd-container">
+      <p class="feature-para">
+        Can't figure out what that variable is for? Search for it! Your search
+        queries will be matched against comments, code, and the commenters'
+        usernames.
+      </p>
+      <img
+        class="feature-screenshot"
+        alt="Screenshot of Reviewington's search bar."
+        src="search.png"
+      />
+    </div>
+    <div class="feature-container even-container">
+      <img
+        class="feature-screenshot"
+        alt="Reviewington screenshot filtered by comment etiquette type."
+        src="filter.png"
+      />
+      <p class="feature-para">
+        If your review comments follow Reviewington's
+        <a
+          href="https://github.com/HomeXLabs/reviewington/blob/main/docs/pr_etiquette.md"
+          >recommended etiquette</a
+        >
+        you can filter for certain types of comments as well. You can enforce
+        review etiquette using the
+        <a href="https://github.com/marketplace/actions/parse-review-comments"
+          >companion GitHub action</a
+        >.
+      </p>
+    </div>
   </body>
 </html>

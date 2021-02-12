@@ -1,0 +1,82 @@
+body {
+  max-width: 60rem;
+  margin: 0 auto;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial,
+    sans-serif, Apple Color Emoji, Segoe UI Emoji;
+}
+
+.logo {
+  display: block;
+  margin: 0 auto;
+  width: 150px;
+}
+
+.intro {
+  text-align: center;
+}
+
+h1 {
+  text-shadow: 1px 1px 1px #ccc;
+  text-align: center;
+}
+
+.action-button {
+  background-color: #a9a9a9;
+  border: 1px solid #888888;
+  text-shadow: 1px 1px 1px #7b7b7b;
+  color: white;
+  padding: 2px 10px;
+  text-align: center;
+  text-decoration: none;
+  margin-right: 5px;
+  box-shadow: 5px 10px;
+}
+
+.action-button:hover {
+  background-color: grey;
+}
+
+.button-container {
+  text-align: center;
+  padding: 10px;
+}
+
+.feature-container {
+  display: flex;
+  align-items: center;
+  border: 1px solid #dadada;
+  border-radius: 6px;
+  margin: 10px;
+  overflow: auto;
+  padding: 10px;
+}
+
+.feature-para {
+  text-align: center;
+  width: 40%;
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.feature-screenshot {
+  width: 60%;
+}
+
+.odd-container .feature-screenshot,
+.even-container .feature-para {
+  float: right;
+}
+
+.odd-container .feature-para,
+.even-container .feature-screenshot {
+  float: left;
+}
+
+a {
+  color: #0366d6;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
