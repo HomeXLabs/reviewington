@@ -7,7 +7,7 @@ jobs:
     name: reviewington check
     runs-on: ubuntu-latest
     steps:
-      -name: 'review comment etiquette'
-       uses: HomexLabs/review-comment-etiquette-action@v1.0.1
-       with: 
-         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: review-comment-etiquette
+        uses: HomeXLabs/review-comment-etiquette-action@v1.0.1
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
