@@ -21,7 +21,11 @@ def has_path_match(discussion: Discussion, filepath: str) -> bool:
 
 def has_comment_search_match(discussion: Discussion, search_query: str) -> bool:
     """Returns discussions that contain the search in any comment."""
-    return any(c for c in discussion.comments if search_query in c.body.lower())
+    return any(
+        c
+        for c in discussion.comments
+        if (search_query in c.body.lower() or search_query in c.user_login)
+    )
 
 
 def has_code_search_match(discussion: Discussion, search_query: str) -> bool:
@@ -32,7 +36,9 @@ def has_code_search_match(discussion: Discussion, search_query: str) -> bool:
 def has_search_match(discussion: Discussion, search_query: str) -> bool:
     """Returns discussions that satisfy the search criteria."""
     sq = search_query.lower()
-    return has_comment_search_match(discussion, sq) or has_code_search_match(discussion, sq)
+    return has_comment_search_match(discussion, sq) or has_code_search_match(
+        discussion, sq
+    )
 
 
 def search_discussions(
